@@ -1,18 +1,16 @@
-import { test, expect } from '@playwright/test';
+import { expect, test } from "@playwright/test";
+import { dirname } from "node:path";
+import { fileURLToPath } from "node:url";
+import { join } from "path";
 
-test('has title', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+test("has title", async ({ page }) => {
+  await page.goto("/");
 
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
-});
+  // img upload
+  const _dirname = dirname(fileURLToPath(import.meta.url));
+  const img1 = join(_dirname, "./testdata/img1.jpg");
+  const img2 = join(_dirname, "./testdata/img2.jpg");
+  await page.getByTestId("image-upload").setInputFiles([img1, img2]);
 
-test('get started link', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
-
-  // Click the get started link.
-  await page.getByRole('link', { name: 'Get started' }).click();
-
-  // Expects page to have a heading with the name of Installation.
-  await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
+  await expect(page.getByText("Playwright test")).toBeVisible();
 });
