@@ -10,7 +10,6 @@ async function compressImages(images: FileList): Promise<File[]> {
       await new Promise<void>((resolve) => {
         myWorker.onmessage = (e: MessageEvent<File>) => {
           console.log("Message received from worker", e.data);
-          setTimeout(() => {}, 5000);
           files.push(e.data);
           resolve();
         };

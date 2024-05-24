@@ -12,5 +12,5 @@ test("has title", async ({ page }) => {
   const img2 = join(_dirname, "./testdata/img2.jpg");
   await page.getByTestId("image-upload").setInputFiles([img1, img2]);
 
-  await expect(page.getByText("Playwright test")).toBeVisible();
+  await expect(page.getByText("Successfully uploaded image")).toBeVisible();
 });

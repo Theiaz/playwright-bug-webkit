@@ -1,3 +1,5 @@
 onmessage = async (msg: MessageEvent<File>) => {
-  console.log('before', OffscreenCanvas)
-}
+  console.log("this should fail inside webkit", OffscreenCanvas);
+
+  postMessage(msg.data);
+};
